@@ -115,6 +115,16 @@ export async function createContentGenerator(
       'User-Agent': `GeminiCLI/${version} (${process.platform}; ${process.arch})`,
     },
   };
+  // Ollama support: if model starts with 'ollama:', use OllamaContentGenerator
+  if (config.model && config.model.startsWith('ollama:')) {
+    // Dynamically import OllamaContentGenerator
+    const { OllamaContentGenerator } = await import('../ollama/ollamaContentGenerator.js');
+    // Model format: 'ollama:<modelName>'
+    const modelName = config.model.replace('ollama:', '');
+    // Optionally allow endpoint override via config.proxy
+    return new OllamaContentGenerator(modelName, config.proxy || 'http://localhost:11434');
+  }
+
   if (
     config.authType === AuthType.LOGIN_WITH_GOOGLE ||
     config.authType === AuthType.CLOUD_SHELL
