@@ -1,4 +1,8 @@
-# Gemini CLI
+# Min CLI
+
+Forked from [gemini-cli]([url](https://github.com/google-gemini/gemini-cli))
+
+Gemini CLI README below:
 
 [![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)
 
