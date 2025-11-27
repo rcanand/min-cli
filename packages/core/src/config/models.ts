@@ -18,6 +18,14 @@ export const GEMINI_MODEL_ALIAS_FLASH_LITE = 'flash-lite';
 
 export const DEFAULT_GEMINI_EMBEDDING_MODEL = 'gemini-embedding-001';
 
+// Ollama model constants for common local models
+export const DEFAULT_OLLAMA_MODEL = 'llama3.2';
+export const OLLAMA_MODEL_LLAMA_3_2 = 'llama3.2';
+export const OLLAMA_MODEL_LLAMA_3_1 = 'llama3.1';
+export const OLLAMA_MODEL_MISTRAL = 'mistral';
+export const OLLAMA_MODEL_CODELLAMA = 'codellama';
+export const OLLAMA_MODEL_DEEPSEEK_CODER = 'deepseek-coder';
+
 // Cap the thinking at 8192 to prevent run-away thinking loops.
 export const DEFAULT_THINKING_MODE = 8192;
 

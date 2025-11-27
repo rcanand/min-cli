@@ -21,6 +21,16 @@ export const DEFAULT_MODEL_CONFIGS: ModelConfigServiceConfig = {
         },
       },
     },
+    'ollama-base': {
+      extends: 'base',
+      modelConfig: {
+        generateContentConfig: {
+          temperature: 0.8,
+          topP: 0.9,
+          topK: 40,
+        },
+      },
+    },
     'chat-base': {
       extends: 'base',
       modelConfig: {
@@ -206,6 +216,37 @@ export const DEFAULT_MODEL_CONFIGS: ModelConfigServiceConfig = {
     'chat-compression-default': {
       modelConfig: {
         model: 'gemini-2.5-pro',
+      },
+    },
+    // Ollama model configurations
+    'llama3.2': {
+      extends: 'ollama-base',
+      modelConfig: {
+        model: 'llama3.2',
+      },
+    },
+    'llama3.1': {
+      extends: 'ollama-base',
+      modelConfig: {
+        model: 'llama3.1',
+      },
+    },
+    mistral: {
+      extends: 'ollama-base',
+      modelConfig: {
+        model: 'mistral',
+      },
+    },
+    codellama: {
+      extends: 'ollama-base',
+      modelConfig: {
+        model: 'codellama',
+      },
+    },
+    'deepseek-coder': {
+      extends: 'ollama-base',
+      modelConfig: {
+        model: 'deepseek-coder',
       },
     },
   },

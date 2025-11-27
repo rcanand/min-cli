@@ -23,6 +23,7 @@ import { InstallationManager } from '../utils/installationManager.js';
 import { FakeContentGenerator } from './fakeContentGenerator.js';
 import { parseCustomHeaders } from '../utils/customHeaderUtils.js';
 import { RecordingContentGenerator } from './recordingContentGenerator.js';
+import { OllamaContentGenerator } from './ollamaContentGenerator.js';
 
 /**
  * Interface abstracting the core functionalities for generating content and counting tokens.
@@ -51,6 +52,7 @@ export enum AuthType {
   USE_VERTEX_AI = 'vertex-ai',
   LEGACY_CLOUD_SHELL = 'cloud-shell',
   COMPUTE_ADC = 'compute-default-credentials',
+  USE_OLLAMA = 'ollama',
 }
 
 export type ContentGeneratorConfig = {
@@ -58,6 +60,7 @@ export type ContentGeneratorConfig = {
   vertexai?: boolean;
   authType?: AuthType;
   proxy?: string;
+  ollamaHost?: string;
 };
 
 export async function createContentGeneratorConfig(
@@ -77,6 +80,13 @@ export async function createContentGeneratorConfig(
     authType,
     proxy: config?.getProxy(),
   };
+
+  // If we are using Ollama, set the host
+  if (authType === AuthType.USE_OLLAMA) {
+    contentGeneratorConfig.ollamaHost =
+      process.env['OLLAMA_HOST'] || 'http://localhost:11434';
+    return contentGeneratorConfig;
+  }
 
   // If we are using Google auth or we are in Cloud Shell, there is nothing else to validate for now
   if (
@@ -150,6 +160,13 @@ export async function createContentGenerator(
         ),
         gcConfig,
       );
+    }
+
+    if (config.authType === AuthType.USE_OLLAMA) {
+      const ollamaGenerator = new OllamaContentGenerator({
+        host: config.ollamaHost,
+      });
+      return new LoggingContentGenerator(ollamaGenerator, gcConfig);
     }
 
     if (

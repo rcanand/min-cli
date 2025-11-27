@@ -24,6 +24,7 @@
     "@google-cloud/opentelemetry-cloud-monitoring-exporter": "^0.21.0",
     "@google-cloud/opentelemetry-cloud-trace-exporter": "^3.0.0",
     "@google/genai": "1.30.0",
+    "ollama": "^0.5.9",
     "@iarna/toml": "^2.2.5",
     "@joshua.litt/get-ripgrep": "^0.0.3",
     "@modelcontextprotocol/sdk": "^1.23.0",
